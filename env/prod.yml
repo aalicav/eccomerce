@@ -1,0 +1,9 @@
+stage: dev
+REGION: ${self:custom.region}
+
+#TABLES
+PRODUCTS_TABLE: products-table
+
+#COGNITO
+COGNITO_USER_POOL: us-east-1_blJW4tXLf 
+COGNITO_CLIENT_ID: 4l0ksvrakmqhe42qgvdcvpsfbb

@@ -1,0 +1,32 @@
+saveProduct:
+  handler: src/controllers/productController.saveProduct
+  timeout: 30
+  events:
+    - http:
+        path: product
+        method: post
+        integration: lambda
+listProduct:
+  handler: src/controllers/productController.listProducts
+  timeout: 30
+  events:
+    - http:
+        path: products
+        method: get
+        integration: lambda
+getProduct:
+  handler: src/controllers/productController.getProduct
+  timeout: 30
+  events:
+    - http:
+        path: product/{id}
+        method: get
+        integration: lambda
+deleteProduct:
+  handler: src/controllers/productController.deleteProduct
+  timeout: 30
+  events:
+    - http:
+        path: product/{id}
+        method: delete
+        integration: lambda

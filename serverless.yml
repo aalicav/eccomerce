@@ -1,0 +1,30 @@
+org: aalicav
+app: eccomerce
+service: eccomerce
+frameworkVersion: "3"
+custom:
+  region: ${opt:regison, 'us-east-1'}
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment: ${file(./env/prod.yml)}
+  iam: ${file(./iamRole.yml)}
+  httpApi:
+    authorizers:
+      cognitoAuthorization:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_blJW4tXLf
+
+functions:
+  - ${file(./functions/users/userController.yml)}
+  - ${file(./functions/products/productController.yml)}
+
+resources:
+  - ${file(./cloudformation.yml)}
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript 
+  - serverless-iam-roles-per-function

@@ -1,0 +1,24 @@
+role:
+  name: ${self:service}-role
+  statements:
+    - Effect: Allow
+      Action:
+        - secretsmanager:GetSecretValue
+        - secretsmanager:DescribeSecret
+        - secretsmanager:GetResourcePolicy
+      Resource: "*"
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:us-east-1:781991331382:table/${self:provider.environment.PRODUCTS_TABLE}
+    - Effect: Allow
+      Action:
+        - cognito-idp:ListUsers
+        - cognito-idp:AdminUpdateUsersAttributes
+        - cognito-idp:AdminCreateUser
+        - cognito-idp:AdminDisableUser
+      Resource: arn:aws:cognito-idp:us-east-1:781991331382:userpool/us-east-1_blJW4tXLf
+
+
