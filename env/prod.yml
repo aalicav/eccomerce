@@ -7,3 +7,6 @@ PRODUCTS_TABLE: products-table
 #COGNITO
 COGNITO_USER_POOL: us-east-1_blJW4tXLf 
 COGNITO_CLIENT_ID: 4l0ksvrakmqhe42qgvdcvpsfbb
+
+#BUCKETS
+BUCKET_PROFILE_PHOTO: arn:aws:s3:::prof-images
