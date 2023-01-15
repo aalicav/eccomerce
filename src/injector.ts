@@ -12,6 +12,7 @@ import { IProductService, ProductService } from "./services/productService";
 import { IProductRepository } from "./infra/persistence/IProductRepository";
 import { productRepository } from "./infra/persistence/repositories/productRepository";
 import { S3Client } from "@aws-sdk/client-s3";
+import { uploadFunctions } from "./infra/utils/uploadFunctions";
 
 const container = new Container();
 
@@ -21,9 +22,11 @@ const s3Client = new S3Client({ region: process.env.REGION });
 const cognitoIdentityProvider = new CognitoIdentityProvider({
   region: process.env.REGION,
 });
+const uploadFunction = new uploadFunctions(s3Client);
 
 container.bind<SNSClient>(TYPES.SNSClient).toConstantValue(snsClient);
 container.bind<S3Client>(TYPES.S3Client).toConstantValue(s3Client);
+container.bind<uploadFunctions>(TYPES.uploadFunctions).toConstantValue(uploadFunction);
 container.bind<DynamoDBClient>(TYPES.DynamoDBClient).toConstantValue(dynamoDB);
 container
   .bind<CognitoIdentityProvider>(TYPES.CognitoIdentityProvider)
