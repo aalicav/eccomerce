@@ -2,6 +2,7 @@ const TYPES = {
   DynamoDBClient: Symbol.for("DynamoDBClient"),
   userRepository: Symbol.for("userRepository"),
   userService: Symbol.for("userService"),
+  uploadFunctions: Symbol.for("uploadFunctions"),
   productService: Symbol.for("productService"),
   productRepository: Symbol.for("productRepository"),
   CognitoIdentityProvider: Symbol.for("CognitoIdentityProvider"),

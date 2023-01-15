@@ -3,6 +3,7 @@ import { CreateUser } from "../dto/User/CreateUser.dto";
 import { ResponseUser } from "../dto/User/ResponseUser.dto";
 import { UpdateUserRequest } from "../dto/User/UpdateUserRequest.dto";
 import { IUserRepository } from "../infra/persistence/IUserRepository";
+import { uploadFunctions } from "../infra/utils/uploadFunctions";
 import TYPES from "../TYPES";
 
 export interface IUserService {
@@ -15,7 +16,8 @@ export interface IUserService {
 @injectable()
 export class UserService implements IUserService {
   constructor(
-    @inject(TYPES.userRepository) private userRepository: IUserRepository
+    @inject(TYPES.userRepository) private userRepository: IUserRepository,
+    @inject(TYPES.uploadFunctions) private uploadServices: uploadFunctions
   ) {}
 
   async updateUser(request: UpdateUserRequest) {
@@ -23,6 +25,16 @@ export class UserService implements IUserService {
   }
 
   async saveUser(request: CreateUser): Promise<void> {
+    if (!process.env.BUCKET_PROFILE_PHOTO) {
+      throw new Error("Bucket arn not found");
+    }
+    if (request.base64photo) {
+      this.uploadServices.uploadPhoto({
+        bucketArn: process.env.BUCKET_PROFILE_PHOTO,
+        file: request.base64photo,
+        path: request.userName,
+      });
+    }
     await this.userRepository.saveUser(request);
   }
   async getUser(id: string): Promise<ResponseUser> {
