@@ -12,6 +12,7 @@ export class ResponseUser {
     this.nickname = isNotUndefined("nickname is required", payload.nickname);
     this.phoneNumberVerified = payload.phoneNumberVerified ?? false;
     this.paymentOptions = payload.paymentOptions;
+    this.photoUrl = isNotUndefined("photoUrl is required", payload.photoUrl);
     this.emailVerified = payload.emailVerified ?? false;
   }
   id: string;
@@ -25,6 +26,7 @@ export class ResponseUser {
   active: boolean;
   MFAactive: boolean;
   profile: TypeUser;
+  photoUrl: string;
   paymentOptions?: PaymentOptions[];
 
   static fromCognito(userType: any): ResponseUser {
@@ -34,6 +36,8 @@ export class ResponseUser {
     return new ResponseUser({
       id: attributes?.find((x: { Name: string }) => x.Name === "sub")?.Value,
       email: attributes?.find((x: { Name: string }) => x.Name === "email")
+        ?.Value,
+      photoUrl: attributes?.find((x: { Name: string }) => x.Name === "custom:photo_url")
         ?.Value,
       name: attributes?.find((x: { Name: string }) => x.Name === "name")?.Value,
       nickname: attributes?.find((x: { Name: string }) => x.Name === "nickname")
