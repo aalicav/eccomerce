@@ -5,6 +5,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { inject, injectable } from "inversify";
 import TYPES from "../../TYPES";
+import { FileUploadRequest } from "./dto/FileUploadRequest";
 
 @injectable()
 export class uploadFunctions {
@@ -15,7 +16,7 @@ export class uploadFunctions {
     path,
   }: {
     bucketArn: string;
-    file: any;
+    file: FileUploadRequest;
     path: string;
   }) {
     const params: PutObjectCommandInput = {
@@ -26,6 +27,8 @@ export class uploadFunctions {
     };
     const command = new PutObjectCommand(params);
 
-    await this.s3Client.send(command);
+    await this.s3Client.send(command, (output) => {
+      output;
+    });
   }
 }
