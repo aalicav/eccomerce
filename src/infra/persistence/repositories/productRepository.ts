@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
 import TYPES from "../../../TYPES";
 
-import { UpdateUserRequest } from "../../../dto/User/UpdateUserRequest.dto";
 import { IProductRepository } from "../IProductRepository";
 import { CreateProduct } from "../../../dto/Product/CreateProduct.dto";
 import {
@@ -14,10 +13,13 @@ import {
   PutItemCommandInput,
   ScanCommand,
   ScanInput,
+  UpdateItemCommand,
+  UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 import { marshallOptions } from "@aws-sdk/util-dynamodb/dist-types/marshall";
 import { ResponseProduct } from "../../../dto/Product/ResponseProduct.dto";
+import { UpdateProductRequest } from "../../../dto/Product/UpdateProductRequest.dto";
 
 @injectable()
 export class productRepository implements IProductRepository {
@@ -48,8 +50,26 @@ export class productRepository implements IProductRepository {
 
     await this.dynamoDb.send(command);
   }
-  updateProduct(_request: UpdateUserRequest): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updateProduct(
+    id: string,
+    request: UpdateProductRequest
+  ): Promise<void> {
+    const params: UpdateItemCommandInput = {
+      TableName: process.env.CATEGORIES_TABLE,
+      Key: marshall({ id: request }),
+      UpdateExpression: "set #n = :name, #d = :description",
+      ExpressionAttributeNames: {
+        "#n": "name",
+        "#d": "description",
+      },
+      ExpressionAttributeValues: marshall({
+        ":name": request.name,
+        ":description": request.description,
+      }),
+      ReturnValues: "UPDATED_NEW",
+    };
+    const command = new UpdateItemCommand(params);
+    await this.dynamoDb.send(command);
   }
   async list(): Promise<ResponseProduct[]> {
     const params: ScanInput = {
