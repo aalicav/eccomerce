@@ -32,7 +32,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "strictPropertyInitialization": false,
     "experimentalDecorators": true
   },
