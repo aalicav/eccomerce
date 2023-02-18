@@ -21,6 +21,18 @@ role:
       Resource: arn:aws:dynamodb:us-east-1:781991331382:table/${self:provider.environment.CATEGORIES_TABLE}
     - Effect: Allow
       Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:us-east-1:781991331382:table/${self:provider.environment.CARTS_TABLE}
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:us-east-1:781991331382:table/${self:provider.environment.ORDERS_TABLE}
+    - Effect: Allow
+      Action:
         - cognito-idp:ListUsers
         - cognito-idp:AdminUpdateUsersAttributes
         - cognito-idp:AdminCreateUser

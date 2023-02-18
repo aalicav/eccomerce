@@ -2,21 +2,22 @@ import { isNotUndefined } from "../../infra/utils/isNotUndefined";
 
 export class ResponseProduct {
   constructor(payload: Partial<ResponseProduct>) {
-    this.id = isNotUndefined("password is required", payload.id);
-    this.stock = isNotUndefined("phone number is required", payload.stock);
-    this.name = isNotUndefined("userName is required", payload.name);
+    this.id = isNotUndefined("id is required", payload.id);
+    this.name = isNotUndefined("name is required", payload.name);
     this.imageUrl = isNotUndefined("userName is required", payload.imageUrl);
-    this.description = isNotUndefined(
-      "description is required",
-      payload.description
+    this.categoryId = isNotUndefined(
+      "categoryId is required",
+      payload.categoryId
     );
-    this.price = isNotUndefined("status is required", payload.price);
+    this.description = payload.description;
+    this.stock = payload.stock ?? 0;
+    this.price = payload.price ?? 0;
   }
   id: string;
   name: string;
-  description: string;
+  categoryId: string;
+  description?: string;
   price: number;
   stock: number;
   imageUrl: string;
-
 }

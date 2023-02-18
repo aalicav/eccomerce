@@ -9,7 +9,7 @@ export interface IProductRepository {
 
   deleteProduct(id: string): Promise<void>;
 
-  updateProduct(request: UpdateUserRequest): Promise<void>;
+  updateProduct(id: string, request: UpdateUserRequest): Promise<void>;
 
   list(): Promise<ResponseProduct[]>;
 }

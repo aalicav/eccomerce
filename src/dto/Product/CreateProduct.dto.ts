@@ -12,8 +12,10 @@ export class CreateProduct {
       payload.description
     );
     this.price = isNotUndefined("status is required", payload.price);
-  }
+    this.categoryId = isNotUndefined("status is required", payload.categoryId);
+    }
   id: string;
+  categoryId: string;
   name: string;
   description: string;
   price: number;
