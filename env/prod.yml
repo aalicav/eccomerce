@@ -4,6 +4,8 @@ REGION: ${self:custom.region}
 #TABLES
 PRODUCTS_TABLE: products-table
 CATEGORIES_TABLE: categories-table
+ORDERS_TABLE: orders-table
+CARTS_TABLE: carts-table
 
 #COGNITO
 COGNITO_USER_POOL: us-east-1_blJW4tXLf 

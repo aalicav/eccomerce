@@ -22,7 +22,6 @@ saveUser:
           claims:
             - sub
             - email
-            - companyId
             - profile
 getUser:
   handler: src/controllers/userController.getUser
@@ -32,6 +31,9 @@ getUser:
           path: user/{id}
           method: get
           integration: lambda
+  authorizer:
+      claims:
+        - profile
 deleteUser:
   handler: src/controllers/userController.deleteUser
   timeout: 30
@@ -40,6 +42,9 @@ deleteUser:
           path: user/{id}
           method: delete
           integration: lambda
+  authorizer:
+      claims:
+        - profile     
 listUsers:
   handler: src/controllers/userController.listUsers
   timeout: 30
