@@ -1,0 +1,44 @@
+saveProduct:
+  handler: src/controllers/productController.saveProduct
+  timeout: 30
+  events:
+    - http:
+        path: product
+        method: post
+        integration: lambda
+  authorizer:
+    claims:
+      - profile
+listProduct:
+  handler: src/controllers/productController.listProducts
+  timeout: 30
+  events:
+    - http:
+        path: products
+        method: get
+        integration: lambda
+  authorizer:
+    claims:
+      - profile
+getProduct:
+  handler: src/controllers/productController.getProduct
+  timeout: 30
+  events:
+    - http:
+        path: product/{id}
+        method: get
+        integration: lambda
+  authorizer:
+    claims:
+      - profile
+deleteProduct:
+  handler: src/controllers/productController.deleteProduct
+  timeout: 30
+  events:
+    - http:
+        path: product/{id}
+        method: delete
+        integration: lambda
+  authorizer:
+    claims:
+      - profile

@@ -1,0 +1,15 @@
+stage: dev
+REGION: ${self:custom.region}
+
+#TABLES
+PRODUCTS_TABLE: products-table
+CATEGORIES_TABLE: categories-table
+ORDERS_TABLE: orders-table
+CARTS_TABLE: carts-table
+
+#COGNITO
+COGNITO_USER_POOL: <your-cognito-user-pool>
+COGNITO_CLIENT_ID: <your-cognito-client-id>
+
+#BUCKETS
+BUCKET_PROFILE_PHOTO: prof-images

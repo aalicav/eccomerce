@@ -1,0 +1,25 @@
+saveUser:
+  handler: src/controllers/userController.savePhoto
+  timeout: 30
+  events:
+    - http:
+        path: user/photo
+        method: post
+        cors:
+          origin: "*"
+          headers:
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+            - Access-Control-Allow-Headers
+            - Access-Control-Allow-Origin
+          allowCredentials: false
+        integration: lambda
+        authorizer:
+          arn: arn:aws:cognito-idp:us-east-1:781991331382:userpool/us-east-1_blJW4tXLf
+          claims:
+            - sub
+            - email
+            - profile

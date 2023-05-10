@@ -1,0 +1,74 @@
+{
+
+  "name": "eccomerce",
+
+  "description": "<!-- title: 'AWS Simple HTTP Endpoint example in NodeJS' description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.' layout: Doc framework: v3 platform: AWS language: nodeJS authorLink: 'https://github.com/serverless' authorName: 'Serverless, inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
+
+  "version": "1.0.0",
+
+  "scripts": {
+
+    "clean": "rimraf .build",
+
+    "build": "npm run clean && tsc",
+
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "deploy": "npm run build && sls deploy --stage prod",
+
+    "start": "npm run clean && sls offline start --stage prod --noAuth"
+
+  },
+
+  "author": "Alisson Oliveira",
+
+  "license": "ISC",
+
+  "dependencies": {
+
+    "@aws-sdk/client-cognito-identity-provider": "^3.231.0",
+
+    "@aws-sdk/client-dynamodb": "^3.226.0",
+
+    "@aws-sdk/client-s3": "^3.241.0",
+
+    "@aws-sdk/client-sns": "^3.238.0",
+
+    "@aws-sdk/util-dynamodb": "^3.226.0",
+
+    "@dazn/lambda-powertools-logger": "^1.28.1",
+
+    "inversify": "^6.0.1",
+
+    "reflect-metadata": "^0.1.13",
+
+    "uuid": "^9.0.0"
+
+  },
+
+  "devDependencies": {
+
+    "@aws-sdk/types": "^3.226.0",
+
+    "@types/aws-lambda": "^8.10.109",
+
+    "@types/node": "^18.11.13",
+
+    "@types/uuid": "^9.0.0",
+
+    "rimraf": "^3.0.2",
+
+    "serverless": "^3.25.1",
+
+    "serverless-iam-roles-per-function": "^3.2.0",
+
+    "serverless-offline": "^12.0.1",
+
+    "serverless-plugin-typescript": "^2.1.4",
+
+    "typescript": "^4.9.4"
+
+  }
+
+}
+
